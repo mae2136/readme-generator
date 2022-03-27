@@ -1,6 +1,7 @@
 const fs = require(`fs`);
 const inquirer = require(`inquirer`);
 const Licenses = require("github-licenses");
+const { generateKey } = require("crypto");
 const licenseList = ["AFL", "APACHE", "MIT", "OSL", "ECL", "EUPL", "EPL2", "ART", "MSPL", "MPL"];
 
 // Ask user for typical readme information
@@ -69,12 +70,15 @@ inquirer
         },
     ])
     .then((response) => {
-        console.log(response);
         console.log(`Success!`);
+        generateReadme(response);
     });
 
 // Add license badge (see if npm exists for this)
 
 
 // Generates license based on user choice
+function generateReadme(response) {
+    console.log(response);
+}
 // const licenses = new Licenses(`${name}`, 2022)
