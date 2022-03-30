@@ -29,13 +29,13 @@ inquirer
             // Project Name
             type: 'input',
             message: 'What is your Project Name?',
-            name: 'projectName',
+            name: 'project',
         },
         {
             // Project Description
             type: 'input',
             message: 'Describe your project:',
-            name: 'projectDesc',
+            name: 'description',
         },
         {
             // How do you use your program?
@@ -46,13 +46,13 @@ inquirer
         {
             // How do you install your program?
             type: 'input',
-            message: 'How do you use your program?',
-            name: 'usage',
+            message: 'How do you install your program?',
+            name: 'install',
         },
         {
             // How can someone contribute to your program?
             type: 'input',
-            message: 'How do you use your program?',
+            message: 'How can someone contribute to your program?',
             name: 'contribute',
         },
         {
@@ -68,6 +68,12 @@ inquirer
             name: 'license',
             choices: licenseList,
         },
+        {
+            // Credit
+            type: 'input',
+            message: 'Would you like to credit anybody or organization?',
+            name: 'credit',
+        },
     ])
     .then((response) => {
         console.log(`Success!`);
@@ -80,5 +86,53 @@ inquirer
 // Generates license based on user choice
 function generateReadme(response) {
     console.log(response);
+    const {name, username, email, project, description, usage, install, contribute, test, license, credit} = response;
+    const licenses = new Licenses(`${name}`, 2022);
+
+    let template = `# ${project}
+    ## Description
+    
+    ${description}
+    
+    ## Table of Contents
+    
+    - [Installation] (#installation)
+    - [Usage] (#usage)
+    - [Credits] (#credits)
+    - [Contribution] (#contribution)
+    - [License] (#license)
+    
+    ## Installation
+    
+    ${install}
+    
+    ## Usage
+    This repository can be viewed at the following link: (link)
+    
+    It should look like the following:
+    
+    ![Screenshot](./screenshot.PNG)
+    
+    Installation Instructions: ${install}
+    
+    ## Credits
+    
+    ${credit}
+    
+    ## How to Contribute
+    
+    ${contribute}
+    
+    ## Tests
+    
+    ${test}
+    
+    ## License
+    
+    ${license}`;
+    
+    fs.writeFile(`readme.md`, template, (err) =>
+    err ? console.error(err) : console.log(`Readme file created!`)
+    );
 }
 // const licenses = new Licenses(`${name}`, 2022)
