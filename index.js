@@ -87,11 +87,13 @@ inquirer
 function generateReadme(response) {
     console.log(response);
     const {name, username, email, project, description, usage, install, contribute, test, license, credit} = response;
-    const licenses = new Licenses(`${name}`, 2022);
-
+    const licenses = new Licenses(`${name}, ${username}`, 2022);
+    let userlicense = licenses.license
     let template = `# ${project}
     ## Description
     
+    This program was created by ${name}. If you have any questions on how this program works, please reach out to me at ${email}.
+
     ${description}
     
     ## Table of Contents
@@ -104,7 +106,7 @@ function generateReadme(response) {
     
     ## Installation
     
-    ${install}
+    Installation Instructions: ${install}
     
     ## Usage
     This repository can be viewed at the following link: (link)
@@ -113,12 +115,11 @@ function generateReadme(response) {
     
     ![Screenshot](./screenshot.PNG)
     
-    Installation Instructions: ${install}
-    
-    ## Credits
-    
-    ${credit}
-    
+    How to use the program:
+    \`\`\`
+    ${usage}
+    \`\`\`
+        
     ## How to Contribute
     
     ${contribute}
@@ -126,10 +127,14 @@ function generateReadme(response) {
     ## Tests
     
     ${test}
+
+    ## Credits
+    
+    ${credit}
     
     ## License
     
-    ${license}`;
+    ${userlicense}`;
     
     fs.writeFile(`readme.md`, template, (err) =>
     err ? console.error(err) : console.log(`Readme file created!`)
