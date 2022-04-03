@@ -20,7 +20,7 @@
   Installation Instructions: npm i
   
   ## Usage
-  This repository can be viewed at the following link: (link)
+  This repository can be viewed at the following link: [Readme Generator Repo](https://github.com/mae2136/readme-generator)
   
   It should look like the following:
   
