@@ -23,7 +23,8 @@ function generateMarkdown(data) {
   const {name, username, email, project, description, usage, install, contribute, test, license, credit} = data;
   let licenseTemplate = renderLicenseSection(license, name);
   // let userlicense = licenses.license
-  return `# ${project}
+  let template = `
+  # ${project}
   ## Description
   
   This program was created by ${username}. If you have any questions on how this program works, please reach out to me at ${email}.
@@ -65,11 +66,16 @@ function generateMarkdown(data) {
 
   ## Credits
   
-  ${credit}
-  
-  ## License
+  ${credit}`;
+
+  if (license != "None") {
+    template += `
+    ## License
   
   ${licenseTemplate}`;
+  }
+  
+  return template
 }
 
 module.exports = generateMarkdown;

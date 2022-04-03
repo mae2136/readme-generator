@@ -1,7 +1,8 @@
 // TODO: Include packages needed for this application
 const fs = require(`fs`);
 const inquirer = require(`inquirer`);
-const markdown = require(`./utils/generateMarkdown`);
+const Licenses = require("github-licenses");
+const Markdown = require(`./utils/generateMarkdown`);
 const licenseList = ["AFL", "APACHE", "MIT", "OSL", "ECL", "EUPL", "EPL2", "ART", "MSPL", "MPL", "None"];
 
 // TODO: Create a function to initialize app
@@ -78,7 +79,7 @@ function init() {
             },
         ])
         .then((response) => {
-            const readme = markdown.generateMarkdown(response);
+            const readme = Markdown(response);
             writeToFile(readme);
             console.log(`Success!`);
         });
@@ -92,7 +93,6 @@ function writeToFile(data) {
         err ? console.error(err) : console.log(`README file created!`)
     );
 }
-// const licenses = new Licenses(`${name}`, 2022)
 
 // Function call to initialize app
 init();
