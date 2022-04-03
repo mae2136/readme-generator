@@ -1,11 +1,11 @@
 const Licenses = require("github-licenses");
 // TODO: Create a function that returns a license badge based on which license is passed in
 // If there is no license, return an empty string
-function renderLicenseBadge(license) {}
+// function renderLicenseBadge(license) {}
 
 // TODO: Create a function that returns the license link
 // If there is no license, return an empty string
-function renderLicenseLink(license) {}
+// function renderLicenseLink(license) {}
 
 // TODO: Create a function that returns the license section of README
 // If there is no license, return an empty string
@@ -14,14 +14,15 @@ function renderLicenseSection(license, name) {
     return "";
   } else {
     const licenses = new Licenses(`${name}`, 2022);
+    return licenses.MIT;
   }
 }
 
 // TODO: Create a function to generate markdown for README
 function generateMarkdown(data) {
   const {name, username, email, project, description, usage, install, contribute, test, license, credit} = data;
-  licenseTemplate = renderLicenseSection(license, name);
-  let userlicense = licenses.license
+  let licenseTemplate = renderLicenseSection(license, name);
+  // let userlicense = licenses.license
   return `# ${project}
   ## Description
   
@@ -68,7 +69,7 @@ function generateMarkdown(data) {
   
   ## License
   
-  ${userlicense}`;
+  ${licenseTemplate}`;
 }
 
 module.exports = generateMarkdown;
